@@ -1,0 +1,32 @@
+class VNode {
+    constructor (tag, data, children, text, elm) {
+        //    当前节点的标签名
+        this.tag = tag
+        this.data = data
+        this.children = children
+        this.text = text
+        this.elm = elm
+    }
+}
+
+function createEmptyVNode () {
+    const node = new VNode()
+    node.text = ''
+    return node
+}
+
+function createTextNode (val) {
+    return new VNode(undefined, undefined, undefined, String(val))
+}
+
+function cloneVNode (node) {
+    const cloneVnode = new VNode(
+        node.tag,
+        node.data,
+        node.children,
+        node.text,
+        node.elm
+    );
+
+    return cloneVnode;
+}

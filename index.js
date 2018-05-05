@@ -1,17 +1,18 @@
-import Dep from "./src/Dep";
-import Vue from './src/Vue'
+import Observable from './src/Observable'
+import Watcher from './src/Watcher'
 
-let o = new Vue({
-    data:{
-        test:'I am test'
-    }
+const hero = new Observable({
+    health: 3000,
+    IQ: 150
 })
 
-o._data.test = 'hello test1'
-o._data.test = 'hello test2'
-o._data.test = 'hello test3'
-o._data.test = 'hello test4'
-o._data.test = 'hello test5'
-o._data.test = 'hello test6'
+new Watcher(hero,'type',()=>{
+    return hero.health>4000?'坦克':'脆皮'
+},(val)=>{
+    console.log(`我的类型是${val}`)
+})
 
-Dep.target = null
+// 这里必须先调用一次，不然就不能依赖收集
+console.log(`英雄初始类型：${hero.type}`)
+
+hero.health = 5000
